@@ -26,3 +26,29 @@ WHERE author IN (
         HAVING SUM(amount) > 10
       );
 ```
+
+# Задание https://stepik.org/lesson/305012/step/10?unit=287020
+## Создать таблицу заказ (ordering), куда включить авторов и названия тех книг, количество экземпляров которых в таблице book меньше среднего количества экземпляров книг в таблице book. В таблицу включить столбец   amount, в котором для всех книг указать одинаковое значение - среднее количество экземпляров книг в таблице book.
+
+## Решение
+
+```sql
+CREATE TABLE ordering AS
+SELECT author, title, 
+   (
+    SELECT ROUND(AVG(amount)) 
+    FROM book
+   ) AS amount
+FROM book
+WHERE amount < (SELECT AVG(amount) FROM book);
+```
+
+# Задание https://stepik.org/lesson/305012/step/11?unit=287020
+## Придумайте один или несколько запросов корректировки данных к  таблицамbook и  supply.
+
+## Решение
+
+```sql
+DELETE FROM supply
+WHERE price < (SELECT AVG(price) FROM book);
+```
