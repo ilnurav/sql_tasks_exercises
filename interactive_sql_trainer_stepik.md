@@ -52,3 +52,15 @@ WHERE amount < (SELECT AVG(amount) FROM book);
 DELETE FROM supply
 WHERE price < (SELECT AVG(price) FROM book);
 ```
+
+# Задание https://stepik.org/lesson/297510/step/2?unit=279270
+## Вывести из таблицы trip информацию о командировках тех сотрудников, фамилия которых заканчивается на букву «а», в отсортированном по убыванию даты последнего дня командировки виде. В результат включить столбцы name, city, per_diem, date_first, date_last.
+
+## Решение
+
+```sql
+SELECT name, city, per_diem, date_first, date_last
+FROM trip
+WHERE SUBSTRING_INDEX(name, ' ', 1) LIKE '%а'
+ORDER BY date_last DESC
+```
