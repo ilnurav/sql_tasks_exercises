@@ -64,3 +64,15 @@ FROM trip
 WHERE SUBSTRING_INDEX(name, ' ', 1) LIKE '%а'
 ORDER BY date_last DESC
 ```
+
+# Задание https://stepik.org/lesson/297510/step/3?unit=279270
+## Вывести в алфавитном порядке фамилии и инициалы тех сотрудников, которые были в командировке в Москве.
+
+## Решение
+
+```sql
+SELECT DISTINCT name
+FROM trip
+WHERE city = 'Москва'
+ORDER BY name
+```
