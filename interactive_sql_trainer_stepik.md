@@ -124,3 +124,15 @@ SELECT name, city, date_first, date_last
 FROM trip
 WHERE DATEDIFF(date_last, date_first) = (SELECT MIN(DATEDIFF(date_last, date_first)) FROM trip)
 ```
+
+# Задание https://stepik.org/lesson/297510/step/8?unit=279270
+## Вывести информацию о командировках, начало и конец которых относятся к одному месяцу (год может быть любой). В результат включить столбцы name, city, date_first, date_last. Строки отсортировать сначала  в алфавитном порядке по названию города, а затем по фамилии сотрудника .
+
+## Решение
+
+```sql
+SELECT name, city, date_first, date_last
+FROM trip
+WHERE MONTH(date_last) = MONTH(date_first)
+ORDER BY city, name
+```
