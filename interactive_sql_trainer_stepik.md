@@ -88,3 +88,16 @@ FROM trip
 GROUP BY city
 ORDER BY city
 ```
+
+# Задание https://stepik.org/lesson/297510/step/5?unit=279270
+## Вывести два города, в которых чаще всего были в командировках сотрудники. Вычисляемый столбец назвать Количество.
+
+## Решение
+
+```sql
+SELECT city, count(city) AS Количество
+FROM trip
+GROUP BY city
+ORDER BY Количество DESC
+LIMIT 2
+```
