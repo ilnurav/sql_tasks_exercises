@@ -160,3 +160,15 @@ FROM trip
 WHERE YEAR(date_first) = 2020 AND MONTH(date_first) IN (2, 3)
 ORDER BY name, Сумма DESC
 ```
+# Задание https://stepik.org/lesson/297510/step/11?unit=279270
+## Вывести фамилию с инициалами и общую сумму суточных, полученных за все командировки для тех сотрудников, которые были в командировках больше чем 3 раза, в отсортированном по убыванию сумм суточных виде. Последний столбец назвать Сумма.
+
+## Решение
+
+```sql
+SELECT name, SUM((DATEDIFF(date_last, date_first) + 1) * per_diem) AS Сумма
+FROM trip
+GROUP BY name
+HAVING COUNT(name) > 3
+ORDER BY Сумма DESC
+```
