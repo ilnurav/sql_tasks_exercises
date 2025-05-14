@@ -160,6 +160,7 @@ FROM trip
 WHERE YEAR(date_first) = 2020 AND MONTH(date_first) IN (2, 3)
 ORDER BY name, Сумма DESC
 ```
+
 # Задание https://stepik.org/lesson/297510/step/11?unit=279270
 ## Вывести фамилию с инициалами и общую сумму суточных, полученных за все командировки для тех сотрудников, которые были в командировках больше чем 3 раза, в отсортированном по убыванию сумм суточных виде. Последний столбец назвать Сумма.
 
@@ -171,4 +172,30 @@ FROM trip
 GROUP BY name
 HAVING COUNT(name) > 3
 ORDER BY Сумма DESC
+```
+
+# Задание https://stepik.org/lesson/305762/step/2?unit=287773
+## Создать таблицу fine следующей структуры:
+
+Поле	Описание
+fine_id	ключевой столбец целого типа с автоматическим увеличением значения ключа на 1
+name	строка длиной 30
+number_plate	строка длиной 6
+violation	строка длиной 50
+sum_fine	вещественное число, максимальная длина 8, количество знаков после запятой 2
+date_violation	дата
+date_payment	дата
+
+## Решение
+
+```sql
+CREATE TABLE fine (
+    fine_id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(30),
+    number_plate VARCHAR(6),
+    violation VARCHAR(6),
+    sum_fine DECIMAL(8, 2),
+    date_violation date,
+    date_payment date
+)
 ```
