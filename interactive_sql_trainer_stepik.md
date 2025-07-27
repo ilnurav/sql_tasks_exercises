@@ -226,3 +226,51 @@ GROUP BY name, number_plate, violation
 HAVING count(*) > 1
 ORDER BY name, number_plate, violation
 ```
+
+# Задание https://stepik.org/lesson/305762/step/6?unit=287773
+## В таблице fine увеличить в два раза сумму неоплаченных штрафов для отобранных на предыдущем шаге записей. 
+
+## Решение
+
+```sql
+UPDATE fine, (SELECT name, number_plate, violation
+FROM fine
+GROUP BY name, number_plate, violation
+HAVING COUNT(violation) >= 2
+ORDER BY name ASC) AS query_in
+SET fine.sum_fine = IF(fine.date_payment IS NULL, fine.sum_fine * 2, fine.sum_fine)  
+WHERE fine.name = query_in.name;
+```
+
+# Задание https://stepik.org/lesson/305762/step/7?unit=287773
+## Водители оплачивают свои штрафы. В таблице payment занесены даты их оплаты:
+
+## Решение
+
+```sql UPDATE fine, payment
+SET fine.date_payment = payment.date_payment, fine.sum_fine = IF(payment.date_payment - payment.date_violation <= 20, fine.sum_fine / 2, fine.sum_fine)
+WHERE fine.name = payment.name AND fine.number_plate = payment.number_plate AND fine.violation = payment.violation AND fine.date_payment IS NULL;
+```
+
+# Задание https://stepik.org/lesson/305762/step/8?unit=287773
+## Создать новую таблицу back_payment, куда внести информацию о неоплаченных штрафах (Фамилию и инициалы водителя, номер машины, нарушение, сумму штрафа  и  дату нарушения) из таблицы fine.
+
+## Решение
+
+```sql
+CREATE TABLE back_payment
+SELECT name, number_plate, violation, sum_fine, date_violation
+FROM fine
+WHERE date_payment IS NULL
+```
+
+# Задание https://stepik.org/lesson/305762/step/9?unit=287773
+## Удалить из таблицы fine информацию о нарушениях, совершенных раньше 1 февраля 2020 года. 
+
+## Решение
+
+```sql
+DELETE FROM fine
+WHERE date_violation < '2020-02-01'
+
+```
