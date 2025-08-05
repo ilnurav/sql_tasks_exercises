@@ -310,3 +310,17 @@ CREATE TABLE book (
     FOREIGN KEY (genre_id)  REFERENCES genre (genre_id) ON DELETE SET NULL
 );
 ```
+
+# Задание https://stepik.org/lesson/308885/step/11?unit=291011
+## Добавьте три последние записи (с ключевыми значениями 6, 7, 8) в таблицу book, первые 5 записей уже добавлены:
+
+## Решение
+
+```sql
+INSERT INTO book (book_id, title, author_id, genre_id, price, amount)
+VALUES (6, 'Стихотворения и поэмы', 3, 2, 650.00, 15);
+INSERT INTO book (book_id, title, author_id, genre_id, price, amount)
+VALUES (7, 'Черный человек', 3, 2, 570.20, 6);
+INSERT INTO book (book_id, title, author_id, genre_id, price, amount)
+VALUES (8, 'Лирика', 4, 2, 518.99, 2)
+```
