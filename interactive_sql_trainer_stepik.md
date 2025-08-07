@@ -337,3 +337,15 @@ ON book.genre_id = genre.genre_id
 WHERE amount > 8
 ORDER BY price DESC
 ```
+
+# Задание https://stepik.org/lesson/308886/step/3?unit=291012
+## Вывести все жанры, которые не представлены в книгах на складе.
+
+## Решение
+
+```sql
+SELECT name_genre
+FROM genre LEFT JOIN book
+ON genre.genre_id = book.genre_id
+WHERE book.genre_id is NULL
+```
